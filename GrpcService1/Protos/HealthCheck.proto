@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService1.Protos";
+
+package healthcheck;
+
+// 服务定义
+service HealthCheck {
+  rpc Ping (PingRequest) returns (PingResponse);
+}
+
+// 请求和响应
+message PingRequest {
+  string message = 1; // optional，可用于传客户端时间戳
+}
+
+message PingResponse {
+  string message = 1; // 例如 "pong"
+  int64 server_time = 2; // 可选，用于延迟计算
+}

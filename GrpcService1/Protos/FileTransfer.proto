@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcService1.Protos";
+
+package filetransfer;
+
+service FileTransfer {
+  rpc InitUpload (InitUploadRequest) returns (InitUploadResponse);
+  rpc UploadChunk (stream UploadChunkRequest) returns (UploadChunkResponse);
+  rpc CompleteUpload (CompleteUploadRequest) returns (CompleteUploadResponse);
+  rpc CheckUploadStatus (CheckUploadStatusRequest) returns (CheckUploadStatusResponse);
+}
+
+message InitUploadRequest {
+  string file_name = 1;
+  int64 file_size = 2;
+  string file_hash = 3;
+}
+
+message InitUploadResponse {
+  string session_id = 1;
+  int64 uploaded_bytes = 2;
+}
+
+message UploadChunkRequest {
+  string session_id = 1;
+  bytes chunk_data = 2;
+  int64 offset = 3;
+}
+
+message UploadChunkResponse {
+  int64 uploaded_bytes = 1;
+}
+
+message CompleteUploadRequest {
+  string session_id = 1;
+  string file_hash = 2;
+}
+
+message CompleteUploadResponse {
+  bool success = 1;
+  string message = 2;
+}
+
+message CheckUploadStatusRequest {
+  string file_name = 1;
+  string file_hash = 2;
+}
+
+message CheckUploadStatusResponse {
+  string session_id = 1;
+  int64 uploaded_bytes = 2;
+  bool exists = 3;
+}
