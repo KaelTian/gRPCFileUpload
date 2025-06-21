@@ -1,0 +1,11 @@
+GrpcService1是GRPC服务端,文件将被上传到服务端本地,SafePathHelper类将自动识别系统的安全文件夹路径,将上传文件夹以及缓存上传文件信息的SQLite db存储到相应位置
+
+FileTransferClient.Console 是一个简单测试的控制台程序
+
+FileTransferClient.Winform 是上传文件的客户端,主要功能如下:
+
+1.上传文件到服务器,这是核心功能
+
+2.appsettings.json 对channel和主题进行了一些配置,并且支持热加载,通过配置文件修改channel settings和主题界面会立刻更新
+
+3.支持ping gRPC服务器,程序启动后会自动验证服务端的连接状态
